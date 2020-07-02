@@ -19,14 +19,25 @@ const Bmi: React.FC = () => {
     }
   }
 
-  const boxStyle = {width: 100, height: 50, border: "solid 1px #000"}
+  const boxStyle = {display: "inline-block", width: 100, height: 60, border: "solid 1px #000",
+                   "margin-left" : 20, "line-height" : "60px", "text-align": "center"}
 
   return (
     <>
-      <p> 身長：<input type="text" value={height} placeholder="170" onChange={(e) => setHeight(e.target.value)} /></p>
-      <p> 体重：<input type="text" value={weight} placeholder="60" onChange={(e) => setWeight(e.target.value)} /></p>
-      <p> <input type="submit" value="BMI" onClick={() => judgeBMI()} /></p>
-      <p> {judgeText ?  <div style={boxStyle}>{judgeText}</div> : null} </p>
+      <p>
+        <label htmlFor="inputHeight">身長 </label>
+        <input type="text" id="inputHeight" value={height} placeholder="170"
+          onChange={(e) => setHeight(e.target.value)} />
+      </p>
+      <p>
+        <label htmlFor="inputWeight">体重 </label>
+        <input type="text" id="inputWeight" value={weight} placeholder="60"
+          onChange={(e) => setWeight(e.target.value)} />
+      </p>
+      <p>
+        <input type="submit" value="BMI" onClick={() => judgeBMI()} />
+        {judgeText &&  <span style={boxStyle}>{judgeText}</span>}
+      </p>
     </>
   )
 }
