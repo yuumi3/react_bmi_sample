@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
+import TextField from '@material-ui/core/TextField'
+import { Paper, Grid, Fab, Container, Box } from '@material-ui/core'
 
 const Bmi: React.FC = () => {
   const [height, setHeight] = useState("")
@@ -23,26 +25,34 @@ const Bmi: React.FC = () => {
     }
   }
 
-  const boxStyle = {display: "inline-block", width: 100, height: 60, border: "solid 1px #000",
-                   "margin-left" : 20, "line-height" : "60px", "text-align": "center"}
+  const boxStyle = {width: 100, height: 60, "line-height" : "60px", "text-align": "center"}
 
   return (
-    <>
-      <p>
-        <label htmlFor="inputHeight">身長 </label>
-        <input type="text" id="inputHeight" value={height} placeholder="170"
-          onChange={(e) => setHeight(e.target.value)} />
-      </p>
-      <p>
-        <label htmlFor="inputWeight">体重 </label>
-        <input type="text" id="inputWeight" value={weight} placeholder="60"
-          onChange={(e) => setWeight(e.target.value)} />
-      </p>
-      <p>
-        <input type="submit" value="BMI" onClick={() => judgeBMI()} />
-        {judgeText &&  <span style={{...boxStyle, backgroundColor: judgeColor}}>{judgeText}</span>}
-      </p>
-    </>
+    <Container maxWidth="xs">
+      <Grid container spacing={3}>
+        <Grid item xs={6}>
+          <TextField id="inputHeight" label="身長"
+            value={height} placeholder="170"
+            onChange={(e) => setHeight(e.target.value)} />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField id="inputWeight" label="体重"
+            value={weight} placeholder="60"
+            onChange={(e) => setWeight(e.target.value)} />
+        </Grid>
+      </Grid>
+      <Box style={{height: 50}}></Box>
+      <Grid container spacing={10}>
+        <Grid item xs={2}></Grid>
+        <Grid item xs={2}>
+          <Fab  color="primary" onClick={() => judgeBMI()}>BMI</Fab>
+        </Grid>
+        <Grid item xs={6}>
+          {judgeText &&
+          <Paper style={{...boxStyle, backgroundColor: judgeColor}}>{judgeText}</Paper>}
+        </Grid>
+      </Grid>
+    </Container>
   )
 }
 
