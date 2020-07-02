@@ -5,6 +5,7 @@ const Bmi: React.FC = () => {
   const [height, setHeight] = useState("")
   const [weight, setWeight] = useState("")
   const [judgeText, setJudgeText] = useState("")
+  const [judgeColor, setJudgeColor] = useState("white")
 
   const judgeBMI = () => {
     const heightM = Number(height) / 100
@@ -12,10 +13,13 @@ const Bmi: React.FC = () => {
 
     if (bmi < 18.5) {
       setJudgeText("やせ")
+      setJudgeColor("yellow")
     } else if (bmi >= 25) {
       setJudgeText("肥満")
+      setJudgeColor("red")
     } else {
       setJudgeText("標準")
+      setJudgeColor("lightgreen")
     }
   }
 
@@ -36,7 +40,7 @@ const Bmi: React.FC = () => {
       </p>
       <p>
         <input type="submit" value="BMI" onClick={() => judgeBMI()} />
-        {judgeText &&  <span style={boxStyle}>{judgeText}</span>}
+        {judgeText &&  <span style={{...boxStyle, backgroundColor: judgeColor}}>{judgeText}</span>}
       </p>
     </>
   )
